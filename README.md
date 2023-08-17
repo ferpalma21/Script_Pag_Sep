@@ -8,8 +8,10 @@ Para las librerías se requiere tener BeautifulSoup y requests.
 Iniciando actualizamos el Ubuntu con los comandos sudo apt update y sudo apt upgrade.
 
 Estando dentro del servidor le instalamos las líbrerias que vamos a ocupar (BeautifulSoup y requests) con los siguientes comandos:
+```
 pip install requests
 pip install beautifulsoup4
+```
 
 pasamos a realizar la instalación de Git con el comando:
 sudo apt install git
