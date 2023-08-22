@@ -12,15 +12,16 @@ base2_url = 'https://www.conaliteg.sep.gob.mx/2023/'
 
 #Contador para P
 for i in range (0,8):
-    #Contador para los Titulos de los libros    
+    #Contador para los Titulos de los libros
     for le in range (0,len(tag_books)):
         #Try y cach por si no encuentra la pagina
         try:
+            #agregando comentario
             # URL de los libros
             url =f'{base_url}P{i}{tag_books[le]}/'
             #url para buscar si existe el libro
             urlbusqueda =f'{base2_url}P{i}{tag_books[le]}.htm#page/2'
-                        
+
             # Realizar la solicitud HTTP a la página web
             response = requests.get(urlbusqueda)
             response.raise_for_status()
@@ -28,7 +29,7 @@ for i in range (0,8):
             # Analizar el contenido HTML utilizando BeautifulSoup
             soup = BeautifulSoup(response.content, 'html.parser')
 
-            #INTENTA ENCONTRAR LAS IMAGENES, DA OTRA COSA 
+            #INTENTA ENCONTRAR LAS IMAGENES, DA OTRA COSA
             img_tags = soup.find_all('img')
 
             #Donde se va a guardar
@@ -39,7 +40,7 @@ for i in range (0,8):
             absolute_path = os.path.abspath(output_folder)
 
             #Base para el numero de pagina
-            base = "000"  
+            base = "000"
 
             # Descargar las imágenes
             for img_cont in range (1,400):
@@ -48,8 +49,8 @@ for i in range (0,8):
                 img_url =f'{url}{img_num}.jpg'
                 img_name = img_url.split('/')[-1]  # Obtener el nombre de archivo de la URL
                 img_path = os.path.join(output_folder, img_name)  # Ruta completa de destino
-                
-                
+
+
                 response = requests.get(img_url)  # Realizar la solicitud HTTP
 
 
@@ -58,7 +59,7 @@ for i in range (0,8):
                         img_file.write(response.content)
                 else:
                     break
-                
+
                 print(f'Imagen descargada: {img_name}')
 
         except requests.exceptions.RequestException as e:
